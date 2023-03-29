@@ -26,18 +26,11 @@
         const output = document.querySelector('#output')
         const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
 
-        //recognition.continuous = false;
         recognition.lang = "en-US";
         recognition.interimResults = false;
         recognition.maxAlternatives = 1;
         recognition.continuous = true
-        recognition.start()
-
-
-        console.log(recognition);
-
-
-
+        
         recognition.onspeechend = () => {
             recognition.stop();
             console.log("Speech recognition has stopped.");
@@ -62,8 +55,7 @@
             output.textContent = `${color}.`;
         };
 
-
-        // startBtn.addEventListener('click', () => start());
+        startBtn.addEventListener('click', () => recognition.start());
     </script>
 
 </body>
