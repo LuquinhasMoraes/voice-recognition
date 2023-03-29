@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <h1>Grave um áudio para gerar um relatório</h1>
+        <section class="input-text">
+            <textarea name="text"></textarea>
+        </section>
+        <button id='start'>Gravar áudio</button>
+        <button>Gerar relatório</button>
+        <section class="output-text">
+            <textarea name="text" id="output"></textarea>
+        </section>
+    </div>
+
+    <script>
+        const output = document.querySelector('#output')
+        const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+
+        //recognition.continuous = false;
+        recognition.lang = "en-US";
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        recognition.continuous = true
+        recognition.start()
+
+
+        console.log(recognition);
+
+
+
+        recognition.onspeechend = () => {
+            recognition.stop();
+            console.log("Speech recognition has stopped.");
+        };
+
+        recognition.onspeechstart = () => {
+
+            console.log("Speech recognition has stopped.");
+        };
+
+        recognition.addEventListener("speechstart", () => {
+            console.log("Speech has been detected");
+        });
+
+        recognition.addEventListener("start", () => {
+            console.log("Speech recognition service has started");
+        });
+
+        recognition.onresult = (event) => {
+            console.log(event);
+            const color = event.results[0][0].transcript;
+            output.textContent = `${color}.`;
+        };
+
+
+        // startBtn.addEventListener('click', () => start());
+    </script>
+
+</body>
+
+</html>
