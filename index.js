@@ -8,7 +8,7 @@ const generateImageBtn = document.querySelector('#generate-image')
 
 const recognition = new webkitSpeechRecognition() || new SpeechRecognition();
 
-recognition.lang = "en-US";
+recognition.lang = "pt-BR";
 recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 recognition.continuous = true
