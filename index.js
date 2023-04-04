@@ -19,7 +19,7 @@ const fetchChatGPW = async (prompt, endpoint = '') => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body:  JSON.stringify({text: prompt})
-    })
+    }).catch(error => alert(JSON.stringify(error)))
     const json = await response.json();
     return json
 }
