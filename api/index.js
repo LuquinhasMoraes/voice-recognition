@@ -1,7 +1,14 @@
-const { Configuration, OpenAIApi } = require("openai");
-const express = require('express');
-const bodyParser = require('body-parser')
-var cors = require('cors')
+import { Configuration, OpenAIApi } from 'openai' 
+import express from 'express'
+import bodyParser from 'body-parser';
+import cors from 'cors'
+import {stringHelper} from './helpers/string.helper.js';
+// const { Configuration, OpenAIApi } = require("openai");
+// const express = require('express');
+// const bodyParser = require('body-parser')
+// var cors = require('cors');
+// const { default: stringHelper } = require("./helpers/string.helper");
+// import {stringHelper} from './helpers/string.helper'
 const app = express();
 const port = 3001;
 
@@ -12,7 +19,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json())
 
-const api_key = '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';
+const api_key = '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';
 const config = new Configuration({
     apiKey: api_key,
 })
@@ -28,10 +35,12 @@ app.post('/', async (req, res) => {
         temperature: 0,
         max_tokens: 1000
     })
+
+    const responseText = stringHelper.sanitize(response.data.choices[0].text)
     
     return res.status(200).json({
         success: true,
-        message: { text: response.data.choices[0].text }
+        message: { text:  responseText}
     });
 });
 app.post('/image', async (req, res) => {
@@ -44,11 +53,11 @@ app.post('/image', async (req, res) => {
         size: "1024x1024"
     })
 
-    const image_url = responseImage.data.data[0].url
+    const imageUrl = responseImage.data.data[0].url
 
     return res.status(200).json({
         success: true,
-        message: { image: image_url }
+        message: { image: imageUrl }
     });
 });
 
