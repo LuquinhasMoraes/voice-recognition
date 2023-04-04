@@ -19,7 +19,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(bodyParser.json())
 
-const api_key = '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';
+const api_key = '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';
 const config = new Configuration({
     apiKey: api_key,
 })
